@@ -49,3 +49,61 @@ There will be many hurdles to overcome.  Logging the user in and keeping the mem
 - **Weeks 3–4:** Implement member accounts, login, and class schedule management.
 - **Weeks 5–6:** Implement announcements and attendance tracking.
 - **Weeks 7–8:** Test permissions and features, fix errors, and improve usability.
+
+## 6. Initial UI Sketch
+
+The initial design uses black, red, and white with separate member and administrator views. The screens below show the main navigation, forms, and controls. Names, attendance records, and announcements are demonstration data.
+
+### Login and Registration
+
+Members can sign in or create an account.
+
+![Login and Registration](login-registration.png)
+
+### Member Dashboard
+
+Members can see upcoming classes and recent announcements.
+
+![Member Dashboard](member-dashboard.png)
+
+### Class Schedule
+
+Members can view the weekly class schedule.
+
+![Class Schedule](class-schedule.png)
+
+### Announcements
+
+Members can read gym updates, closures, and tournament information.
+
+![Announcements](announcements.png)
+
+### My Attendance
+
+Members can review their personal attendance history and filter by date.
+
+![My Attendance](my-attendance.png)
+
+### Administrator Dashboard
+
+Administrators can access class management, announcements, and attendance tools.
+
+![Administrator Dashboard](admin-dashboard.png)
+
+### Manage Classes
+
+Administrators can add, edit, or cancel classes.
+
+![Manage Classes](manage-classes.png)
+
+### Manage Announcements
+
+Administrators can create, edit, and delete announcements.
+
+![Manage Announcements](manage-announcements.png)
+
+### Record Attendance
+
+Administrators can select a class and date, mark members present, and save corrections.
+
+![Record Attendance](record-attendance.png)
