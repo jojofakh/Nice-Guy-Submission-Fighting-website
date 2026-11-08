@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. The palette stays deliberately plain — near-black, bone
+   white, and the crimson pulled from the NGSF logo. Every accent on the site
+   is one of these three, which is what keeps the look calm at scale.
+   --------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #08090b;
+  --color-surface: #0d0f12;
+  --color-surface-2: #14171b;
+  --color-line: #23272d;
+  --color-line-bright: #33383f;
+  --color-bone: #f5f5f6;
+  --color-ash: #9ca0a8;
+  --color-ash-dim: #6b6f77;
+  --color-blood: #c8102e;
+  --color-blood-bright: #ef2444;
+
+  --font-display: "Oswald", "Arial Narrow", sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Offset anchor jumps so the sticky header never covers a heading. */
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-blood);
+    color: var(--color-bone);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blood-bright);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Shared primitives
+   --------------------------------------------------------------------------- */
+
+/** Eyebrow label: small mono caps used above section headings. */
+@utility kicker {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-ash-dim);
+}
+
+/** Faint technical grid, used behind the hero and CTA bands. */
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+}
+
+/** Hairline diagonal hatch for the crimson accent bands. */
+@utility hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-blood) 0 1px,
+    transparent 1px 8px
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll reveal. Elements start shifted and fade in when <Reveal> marks them
+   visible; anyone with reduced motion enabled sees them immediately.
+   --------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s var(--ease-out-expo),
+    transform 0.7s var(--ease-out-expo);
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* With scripting off nothing ever flips data-visible, so opt out entirely. */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
